@@ -113,7 +113,7 @@ public class GetLatestChangesService
             path,
             x.LineNumber,
             EntityChangeTypeEnum.Removed,
-            originalFields: this.GetFieldData(fieldNames, x.Content));
+            OriginalFields: this.GetFieldData(fieldNames, x.Content));
     }
 
     private Patch? GetChangesBasedOnLastCommit(Repository repo) 

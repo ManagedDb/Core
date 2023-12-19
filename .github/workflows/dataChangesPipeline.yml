@@ -28,4 +28,4 @@ jobs:
     - name: Run Changes Generator
       run: dotnet run -c Release --project src\ManagedDb.ConsoleClient\ManagedDb.ConsoleClient.csproj -- main data.json
     - name: Display data in table format
-      run: cat data.json | jq -r '.[] | [.field1, .field2, .field3] | @tsv' | column -t
+      run: cat data.json | jq -r '.[] | [.Name, .Path, .RowNumber, .ChangeType] | @tsv' | column -t

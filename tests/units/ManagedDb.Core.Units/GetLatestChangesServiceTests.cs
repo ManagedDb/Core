@@ -1,4 +1,5 @@
 using ManagedDb.Core.Features.GetLatestChanges;
+using System.Text.Json;
 
 namespace ManagedDb.Core.Units;
 
@@ -30,6 +31,5 @@ public class GetLatestChangesServiceTests
 
         // Assert
         Assert.IsNotNull(changes);
-
     }
 }

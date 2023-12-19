@@ -3,14 +3,14 @@
 public record EntityChange(
     string Name,
     string Path,
-    int rowNumber,
+    int RowNumber,
     EntityChangeTypeEnum ChangeType,
-    Dictionary<string, string>? originalFields = null,
-    Dictionary<string, string>? updatedFields = null);
+    Dictionary<string, string>? OriginalFields = null,
+    Dictionary<string, string>? UpdatedFields = null);
 
 public enum EntityChangeTypeEnum
 {
-    Added,
+    Added = 1,
     Updated,
     Removed
 }
