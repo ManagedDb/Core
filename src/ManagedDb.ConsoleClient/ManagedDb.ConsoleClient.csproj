@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <MDBRootFolder>$(MDBRootFolder)</MDBRootFolder>
     <DataOutputPath>data1.json</DataOutputPath>
-    <ChangeMode>main</ChangeMode>
+    <ChangeMode>commit</ChangeMode>
   </PropertyGroup>
 
   <ItemGroup>

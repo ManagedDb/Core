@@ -139,8 +139,8 @@ public class GetLatestChangesService
         }
 
         var patches = repo.Diff.Compare<Patch>(
-            previousCommit?.Tree,
             latestCommit.Tree,
+            previousCommit?.Tree,
             pathes);
 
         return patches;
