@@ -152,6 +152,16 @@ public class GetLatestChangesService
 
         var currentBranch = repo.Head;
 
+        if(mainBranch == null || mainBranch.Tip == null || mainBranch.Tip.Tree == null)
+        {
+            Console.WriteLine("Main branch is empty");
+        }
+
+        if (currentBranch == null || currentBranch.Tip == null || currentBranch.Tip.Tree == null)
+        {
+            Console.WriteLine("Current branch is empty");
+        }
+
         var allDiffs = repo.Diff.Compare<TreeChanges>(
             mainBranch.Tip.Tree,
             currentBranch.Tip.Tree);
