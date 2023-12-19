@@ -29,6 +29,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Run Changes Generator
-      run: dotnet run -c Release --project ${{ github.workspace }}/src/ManagedDb.ConsoleClient/ManagedDb.ConsoleClient.csproj -- commit ${{ github.workspace }}/data.json
+      run: dotnet run -c Release --project ${{ github.workspace }}/src/ManagedDb.ConsoleClient/ManagedDb.ConsoleClient.csproj -- commit ${{ github.workspace }}/data.json ${{ github.workspace }}
     - name: Display data in table format
       run: cat ${{ github.workspace }}/data.json | jq -r '.[] | [.Name, .Path, .RowNumber, .ChangeType] | @tsv' | column -t
