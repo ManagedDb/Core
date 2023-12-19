@@ -6,8 +6,12 @@ name: CI pipeline
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+    - 'data/**/*.csv'
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+    - 'data/**/*.csv'
 
 jobs:
   build:

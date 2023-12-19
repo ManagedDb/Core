@@ -6,14 +6,17 @@ name: Data changes pipeline
 on:
   push:
     branches: [ "main" ]
+    paths:
+    - 'data/**/*.csv'
   pull_request:
     branches: [ "main" ]
+    paths:
+    - 'data/**/*.csv'
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.modified, 'data') }}
 
     steps:
     - uses: actions/checkout@v3
