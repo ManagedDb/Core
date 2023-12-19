@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "e2e", "e2e", "{F3729F40-DC2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedDb.Core.Units", "tests\units\ManagedDb.Core.Units\ManagedDb.Core.Units.csproj", "{5B142348-6C3E-4598-BCD4-A205A0EB3678}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedDb.ConsoleClient", "src\ManagedDb.ConsoleClient\ManagedDb.ConsoleClient.csproj", "{B106800E-6CBA-4811-BA3E-60D9315FAA4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{5B142348-6C3E-4598-BCD4-A205A0EB3678}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B142348-6C3E-4598-BCD4-A205A0EB3678}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B142348-6C3E-4598-BCD4-A205A0EB3678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B106800E-6CBA-4811-BA3E-60D9315FAA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B106800E-6CBA-4811-BA3E-60D9315FAA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B106800E-6CBA-4811-BA3E-60D9315FAA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B106800E-6CBA-4811-BA3E-60D9315FAA4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 		{B0FA29D4-A825-4774-B2A5-9421939C7700} = {8C6F3D06-8390-4559-B738-49A57B25C100}
 		{F3729F40-DC2F-48B3-ADE5-C5C67911DC01} = {8C6F3D06-8390-4559-B738-49A57B25C100}
 		{5B142348-6C3E-4598-BCD4-A205A0EB3678} = {B0FA29D4-A825-4774-B2A5-9421939C7700}
+		{B106800E-6CBA-4811-BA3E-60D9315FAA4F} = {E070EDAE-B939-41A2-9163-6F36BAB20898}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F604C3DB-3F61-460C-BF02-2EB786C01D10}
