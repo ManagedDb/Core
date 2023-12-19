@@ -155,6 +155,19 @@ public class GetLatestChangesService
         if(mainBranch == null || mainBranch.Tip == null || mainBranch.Tip.Tree == null)
         {
             Console.WriteLine("Main branch is empty");
+            
+            if(mainBranch == null)
+            {
+                Console.WriteLine("Main branch is null");
+            }
+            else if(mainBranch.Tip == null)
+            {
+                Console.WriteLine("Main branch tip is null");
+            }
+            else if(mainBranch.Tip.Tree == null)
+            {
+                Console.WriteLine("Main branch tip tree is null");
+            }
         }
 
         if (currentBranch == null || currentBranch.Tip == null || currentBranch.Tip.Tree == null)
@@ -162,9 +175,12 @@ public class GetLatestChangesService
             Console.WriteLine("Current branch is empty");
         }
 
+        Console.WriteLine($"Main branch: {mainBranch.FriendlyName}");
+        Console.WriteLine($"Current branch: {currentBranch.FriendlyName}");
+
         var allDiffs = repo.Diff.Compare<TreeChanges>(
-            mainBranch.Tip.Tree,
-            currentBranch.Tip.Tree);
+            mainBranch?.Tip?.Tree,
+            currentBranch?.Tip?.Tree);
 
         var diffs = allDiffs
             .Where(x => this.IsPathCorrect(x.Path))
