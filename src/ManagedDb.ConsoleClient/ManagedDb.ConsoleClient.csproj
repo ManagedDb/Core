@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <MDBRootFolder>$(MDBRootFolder)</MDBRootFolder>
-    <DataOutputPath>data1.json</DataOutputPath>
+    <DataOutputPath>data.json</DataOutputPath>
     <ChangeMode>main</ChangeMode>
   </PropertyGroup>
 
