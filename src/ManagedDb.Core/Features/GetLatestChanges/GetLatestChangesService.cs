@@ -148,8 +148,13 @@ public class GetLatestChangesService
 
     private Patch? GetChangesBasedOnMainBranch(Repository repo) 
     {
-        var mainBranch = repo.Branches[mainBranchName];
+        foreach (var item in repo.Branches) 
+        {
+            Console.WriteLine($"Branch name: {item.FriendlyName}");
+        }
 
+        var mainBranch = repo.Branches[mainBranchName];
+        
         var currentBranch = repo.Head;
 
         if(mainBranch == null || mainBranch.Tip == null || mainBranch.Tip.Tree == null)
