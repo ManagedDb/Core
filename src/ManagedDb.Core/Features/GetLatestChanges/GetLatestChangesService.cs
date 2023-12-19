@@ -13,9 +13,12 @@ public class GetLatestChangesService
     {
         using var repo = new Repository(repoPath);
 
-        var patches = mode == GetChangesModeEnum.LastCommit
-            ? this.GetChangesBasedOnLastCommit(repo)
-            : this.GetChangesBasedOnMainBranch(repo);
+        var patches = mode switch
+        {
+            GetChangesModeEnum.LastCommit => this.GetChangesBasedOnLastCommit(repo),
+            GetChangesModeEnum.MainBranch => this.GetChangesBasedOnMainBranch(repo),
+            _ => this.GetOther(repo)
+        };
 
         var result = new List<EntityChange>();
 
@@ -150,6 +153,11 @@ public class GetLatestChangesService
                 pathes);
 
         return patches;
+    }
+
+    private Patch? GetOther(Repository repo) 
+    {
+        throw new NotImplementedException();
     }
 
     private bool IsPathCorrect(string path) => 

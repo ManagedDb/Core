@@ -30,6 +30,18 @@ public class GetLatestChangesServiceTests
 
         // Assert
         Assert.IsNotNull(changes);
+    }
 
+    [TestMethod]
+    public void GetChanges_Other_Should_Work()
+    {
+        // Arrange
+        var service = new GetLatestChangesService();
+
+        // Act
+        var changes = service.GetChanges((GetChangesModeEnum)100);
+
+        // Assert
+        Assert.IsNotNull(changes);
     }
 }
