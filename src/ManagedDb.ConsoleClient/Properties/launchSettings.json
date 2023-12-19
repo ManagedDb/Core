@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ManagedDb.ConsoleClient": {
+      "commandName": "Project",
+      "commandLineArgs": "$(ChangeMode) $(DataOutputPath) $(MDBRootFolder)",
+      "environmentVariables": {
+        "MDBRootFolder": "$(MDBRootFolder)"
+      }
+    }
+  }
+}

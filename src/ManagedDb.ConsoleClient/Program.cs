@@ -11,10 +11,21 @@ var pathToSave = args.Length > 1
     ? args[1]
     : string.Empty;
 
+var repoPath = args.Length > 2
+    ? args[2]
+    : Environment.GetEnvironmentVariable("MDBRootFolder");
+
 Console.WriteLine($"Changes event: {command}");
 Console.WriteLine($"Path to save: {pathToSave}");
+Console.WriteLine($"Repo path: {repoPath}");
 
-var service = new GetLatestChangesService();
+if (string.IsNullOrWhiteSpace(repoPath))
+{
+    Console.WriteLine("Repo path is empty");
+    return;
+}
+
+var service = new GetLatestChangesService(repoPath);
 
 var changes = service.GetChanges(command);
 
@@ -36,14 +47,9 @@ if (string.IsNullOrWhiteSpace(pathToSave))
 
 var dirNames = Path.GetDirectoryName(pathToSave);
 
-if(!Directory.Exists(dirNames))
+if(!Directory.Exists(dirNames) && !string.IsNullOrWhiteSpace(dirNames))
 {
-    Directory.CreateDirectory(pathToSave);
-}
-
-if (File.Exists(pathToSave)) 
-{
-    File.Delete(pathToSave);
+    Directory.CreateDirectory(dirNames);
 }
 
 File.WriteAllText(

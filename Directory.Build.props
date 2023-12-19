@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup>
+        <MDBRootFolder>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</MDBRootFolder>
+    </PropertyGroup>
+</Project>

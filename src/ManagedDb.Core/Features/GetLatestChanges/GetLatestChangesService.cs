@@ -1,4 +1,5 @@
 ﻿using LibGit2Sharp;
+using System.Reflection.Metadata;
 
 namespace ManagedDb.Core.Features.GetLatestChanges;
 
@@ -6,12 +7,35 @@ public class GetLatestChangesService
 {
     private readonly string dataFolderName = @"data";
     private readonly string fileExtension = ".csv";
-    private readonly string repoPath = @"D:\Repositories\ManagedDb\Core";
+    private readonly string repoPath;
     private readonly string mainBranchName = "main";
+
+    public GetLatestChangesService(string repoPath)
+    {
+        this.repoPath = repoPath;
+    }
+
+    public GetLatestChangesService()
+    {
+        var currentDir = Environment.CurrentDirectory;
+        var dir = new DirectoryInfo(currentDir);
+
+        while(!Repository.IsValid(dir.FullName) && dir != null)
+        {
+            dir = dir.Parent;
+        }
+
+        if (dir == null)
+        {
+            ArgumentException.ThrowIfNullOrEmpty(currentDir);
+        }
+
+        this.repoPath = dir.FullName;
+    }
 
     public ICollection<EntityChange> GetChanges(GetChangesModeEnum mode)
     {
-        using var repo = new Repository(repoPath);
+        using var repo = new Repository(this.repoPath);
 
         var patches = mode == GetChangesModeEnum.LastCommit
             ? this.GetChangesBasedOnLastCommit(repo)
@@ -116,9 +140,9 @@ public class GetLatestChangesService
         }
 
         var patches = repo.Diff.Compare<Patch>(
-                previousCommit?.Tree,
-                latestCommit.Tree,
-                pathes);
+            previousCommit?.Tree,
+            latestCommit.Tree,
+            pathes);
 
         return patches;
     }
