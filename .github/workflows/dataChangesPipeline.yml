@@ -30,5 +30,10 @@ jobs:
       run: dotnet build --no-restore
     - name: Run Changes Generator
       run: dotnet run -c Release --project ${{ github.workspace }}/src/ManagedDb.ConsoleClient/ManagedDb.ConsoleClient.csproj -- commit ${{ github.workspace }}/data.json ${{ github.workspace }}
+    - name: Archive Changes Generator data
+      uses: actions/upload-artifact@v3
+      with:
+        name: mdg_report
+        path: ${{ github.workspace }}/data.json
     - name: Display data in table format
       run: cat ${{ github.workspace }}/data.json | jq -r '.[] | [.Name, .Path, .RowNumber, .ChangeType] | @tsv' | column -t
