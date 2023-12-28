@@ -27,7 +27,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build -c Release -o ${{ github.workspace }}/output
+      run: dotnet build --no-restore -c Release -o ${{ github.workspace }}/output
     - name: Show output folder
       run: ls ${{ github.workspace }}/output
     - name: Get owner and repo

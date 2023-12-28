@@ -37,7 +37,7 @@ namespace ManagedDb.Core
                 var mdbOptions = serviceProvider.GetRequiredService<IOptions<ManagedDbOptions>>();
 
                 Console.WriteLine("0.4");
-                httpClient.BaseAddress = new Uri(mdbOptions?.Value?.GitHubBaseUrl);
+                httpClient.BaseAddress = new Uri("https://api.github.com/");
 
                 Console.WriteLine("0.5");
                 httpClient.DefaultRequestHeaders.Add(
