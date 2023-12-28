@@ -43,12 +43,12 @@ jobs:
       with:
         files: '${{ github.workspace }}/output/appsettings.json'
       env:
-        ManagedDb.Project: ${{ env.OWNER }}
-        ManagedDb.Repository: ${{ env.REPO_NAME }}
-        ManagedDb.PrId: ${{ github.event.pull_request.number }}
-        ManagedDb.Token: ${{ secrets.GITHUB_TOKEN }}
-        ManagedDb.PathToSave: ${{ github.workspace }}/data.json
-        ManagedDb.RepoPath: ${{ github.workspace }}
+        ManagedDb__Project: ${{ env.OWNER }}
+        ManagedDb__Repository: ${{ env.REPO_NAME }}
+        ManagedDb__PrId: ${{ github.event.pull_request.number }}
+        ManagedDb__Token: ${{ secrets.GITHUB_TOKEN }}
+        ManagedDb__PathToSave: ${{ github.workspace }}/data.json
+        ManagedDb__RepoPath: ${{ github.workspace }}
     - name: Run Changes Generator
       run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient
     - name: Archive Changes Generator data
