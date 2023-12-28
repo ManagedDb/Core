@@ -10,7 +10,10 @@ Console.WriteLine("1.1");
 
 var builder = CoconaApp.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("appsettings.json");
+var appsettingsPath = Path.Combine(Environment.CurrentDirectory, "appsettings.json");
+builder.Configuration
+    .AddJsonFile(appsettingsPath)
+    .AddEnvironmentVariables();
 
 Console.WriteLine("1.2");
 
