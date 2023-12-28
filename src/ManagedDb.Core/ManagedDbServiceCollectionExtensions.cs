@@ -14,18 +14,18 @@ namespace ManagedDb.Core
     {
         public static IServiceCollection AddManagedDb(
             this IServiceCollection services,
-            IOptions<ManagedDbOptions> options = null) 
+            IOptions<ManagedDbOptions>? options = null) 
         {
             if (options != null) 
             {
                 services.AddOptions<ManagedDbOptions>()
                     .Configure(option =>
                     {
-                        option.GitHubBaseUrl = options?.Value?.GitHubBaseUrl;
-                        option.Project = options?.Value?.Project;
-                        option.Repository = options?.Value?.Repository;
-                        option.Token = options?.Value?.Token;
-                        option.PrId = options?.Value?.PrId ?? -1;
+                        option.GitHubBaseUrl = options.Value.GitHubBaseUrl;
+                        option.Project = options.Value.Project;
+                        option.Repository = options.Value.Repository;
+                        option.Token = options.Value.Token;
+                        option.PrId = options.Value.PrId;
                     });
             }
 
@@ -33,28 +33,21 @@ namespace ManagedDb.Core
 
             services.AddHttpClient("github", (serviceProvider, httpClient) =>
             {
-                Console.WriteLine("0.3");
                 var mdbOptions = serviceProvider.GetRequiredService<IOptions<ManagedDbOptions>>();
 
-                Console.WriteLine("0.4");
-                httpClient.BaseAddress = new Uri("https://api.github.com/");
+                httpClient.BaseAddress = new Uri(mdbOptions.Value.GitHubBaseUrl);
 
-                Console.WriteLine("0.5");
                 httpClient.DefaultRequestHeaders.Add(
                     "Accept", 
                     "application/vnd.github.v3+json");
 
-                Console.WriteLine("0.6");
                 httpClient.DefaultRequestHeaders.Add(
                     "User-Agent", 
                     "HttpRequestsSample");
 
-                Console.WriteLine("0.7");
                 httpClient.DefaultRequestHeaders.Add(
                     "Authorization",
-                    $"Bearer {mdbOptions?.Value?.Token}");
-
-                Console.WriteLine("0.8");
+                    $"Bearer {mdbOptions.Value.Token}");
             });
 
             return services;
@@ -77,6 +70,7 @@ namespace ManagedDb.Core
 
         public string PathToSave { get; set; }
 
+        [Obsolete]
         public string RepoPath { get; set; }
     }
 }
