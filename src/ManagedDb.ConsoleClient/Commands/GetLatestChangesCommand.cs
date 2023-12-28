@@ -29,13 +29,11 @@ public class GetLatestChangesCommand
     {
         Console.WriteLine("2.1");
 
-        return;
-
         var pathToSave = options?.Value?.PathToSave;
         var repoPath = options?.Value?.RepoPath;
 
-        //this.logger.LogDebug("Path to save: {pathToSave}", pathToSave);
-        //this.logger.LogDebug("Repo path: {repoPath}", repoPath);
+        this.logger.LogDebug("Path to save: {pathToSave}", pathToSave);
+        this.logger.LogDebug("Repo path: {repoPath}", repoPath);
 
         var changes = await this.prService
             .GetChangesAsync(GetChangesModeEnum.MainBranch);
