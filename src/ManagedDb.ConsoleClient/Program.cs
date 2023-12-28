@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = CoconaApp.CreateBuilder();
 
+builder.Services.AddLogging();
+
 builder.Services.Configure<ManagedDbOptions>(
     builder.Configuration.GetSection(ManagedDbOptions.ConfigKey));
 
