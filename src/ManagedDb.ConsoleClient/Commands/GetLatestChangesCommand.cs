@@ -19,6 +19,7 @@ public class GetLatestChangesCommand
         IOptions<ManagedDbOptions> options,
         ILogger<GetLatestChangesCommand> logger)
     {
+        Console.WriteLine("2.0");
         this.prService = prService;
         this.options = options;
         this.logger = logger;
