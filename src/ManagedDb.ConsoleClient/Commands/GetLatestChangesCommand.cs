@@ -15,19 +15,17 @@ public class GetLatestChangesCommand
     private readonly ILogger<GetLatestChangesCommand> logger;
 
     public GetLatestChangesCommand(
-        IPullRequestService prService,
-        IOptions<ManagedDbOptions> options,
-        ILogger<GetLatestChangesCommand> logger)
+        IPullRequestService prService)
     {
         Console.WriteLine("2.0");
         this.prService = prService;
-        this.options = options;
-        this.logger = logger;
     }
 
     public async Task Handle()
     {
         Console.WriteLine("2.1");
+
+        return;
 
         var pathToSave = options?.Value?.PathToSave;
         var repoPath = options?.Value?.RepoPath;
