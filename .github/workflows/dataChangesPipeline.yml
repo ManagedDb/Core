@@ -28,6 +28,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore -c Release -o ${{ github.workspace }}/output
+    - name: Show output folder
+      run: ls ${{ github.workspace }}/output
     - name: Get owner and repo
       run: |
         REPO=${{ github.repository }}
@@ -46,7 +48,7 @@ jobs:
         ManagedDb.PrId: ${{ github.event.pull_request.number }}
         ManagedDb.Token: ${{ secrets.GITHUB_TOKEN }}
     - name: Run Changes Generator
-      run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient.exe github --path-to-save ${{ github.workspace }}/data.json --repo-path ${{ github.workspace }}
+      run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient github --path-to-save ${{ github.workspace }}/data.json --repo-path ${{ github.workspace }}
     - name: Archive Changes Generator data
       uses: actions/upload-artifact@v3
       with:
