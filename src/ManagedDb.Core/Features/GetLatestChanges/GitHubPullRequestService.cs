@@ -29,9 +29,13 @@ public class GitHubPullRequestService : IPullRequestService
     {
         var data = await this.CallApiAsync();
 
-        var result = new List<EntityChange>();  
+        var result = new List<EntityChange>();
 
-        foreach(var changedFile in data) 
+        var filteredData = data
+            .Where(x => x.FileName.EndsWith("csv"))
+            .ToArray();
+
+        foreach(var changedFile in filteredData) 
         {
             var changes = this.ParseChanges(changedFile);
             result.AddRange(changes);
