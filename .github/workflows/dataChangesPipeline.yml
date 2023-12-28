@@ -48,7 +48,7 @@ jobs:
         ManagedDb.PrId: ${{ github.event.pull_request.number }}
         ManagedDb.Token: ${{ secrets.GITHUB_TOKEN }}
     - name: Run Changes Generator
-      run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient github
+      run: sudo ${{ github.workspace }}/output/ManagedDb.ConsoleClient github
     - name: Archive Changes Generator data
       uses: actions/upload-artifact@v3
       with:
