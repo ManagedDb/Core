@@ -3,18 +3,20 @@
 using Cocona;
 using ManagedDb.ConsoleClient.Commands;
 using ManagedDb.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 Console.WriteLine("1.1");
 
-var builder = CoconaApp.CreateBuilder();
+var builder = CoconaApp.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile("appsettings.json");
 
 Console.WriteLine("1.2");
 
 builder.Services.AddLogging();
 
 Console.WriteLine("1.3");
-
 builder.Services.Configure<ManagedDbOptions>(
     builder.Configuration.GetSection(ManagedDbOptions.ConfigKey));
 
