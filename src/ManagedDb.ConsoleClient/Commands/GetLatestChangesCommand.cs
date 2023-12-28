@@ -1,7 +1,9 @@
 ﻿using Cocona;
+using ManagedDb.Core;
 using ManagedDb.Core.Features.GetLatestChanges;
 using ManagedDb.Core.Features.PullRequests;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
 
 namespace ManagedDb.ConsoleClient.Commands;
@@ -9,19 +11,25 @@ namespace ManagedDb.ConsoleClient.Commands;
 public class GetLatestChangesCommand
 {
     private readonly IPullRequestService prService;
+    private readonly IOptions<ManagedDbOptions> options;
     private readonly ILogger<GetLatestChangesCommand> logger;
 
     public GetLatestChangesCommand(
         IPullRequestService prService,
+        IOptions<ManagedDbOptions> options,
         ILogger<GetLatestChangesCommand> logger)
     {
         this.prService = prService;
+        this.options = options;
         this.logger = logger;
     }
 
     [Command("github")]
-    public async Task Handle(string pathToSave, string repoPath)
+    public async Task Handle()
     {
+        var pathToSave = options?.Value?.PathToSave;
+        var repoPath = options?.Value?.RepoPath;
+
         this.logger.LogInformation("Path to save: {pathToSave}", pathToSave);
         this.logger.LogInformation("Repo path: {repoPath}", repoPath);
 

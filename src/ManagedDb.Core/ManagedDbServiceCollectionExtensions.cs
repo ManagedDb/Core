@@ -66,5 +66,9 @@ namespace ManagedDb.Core
         public int PrId { get; set; }
 
         public string Token { get; set; }
+
+        public string PathToSave { get; set; }
+
+        public string RepoPath { get; set; }
     }
 }
