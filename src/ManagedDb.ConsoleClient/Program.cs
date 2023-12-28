@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = CoconaApp.CreateBuilder(args);
 
 string strExeFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-string strWorkPath = Path.GetDirectoryName(strExeFilePath);
+string strWorkPath = Path.GetDirectoryName(strExeFilePath) ?? string.Empty;
 
 var appsettingsPath = Path.Combine(strWorkPath, "appsettings.json");
 builder.Configuration

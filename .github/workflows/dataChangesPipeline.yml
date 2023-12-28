@@ -28,8 +28,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore -c Release -o ${{ github.workspace }}/output
-    - name: Show output folder
-      run: ls ${{ github.workspace }}/output
     - name: Get owner and repo
       run: |
         REPO=${{ github.repository }}
@@ -49,8 +47,6 @@ jobs:
         ManagedDb.Token: ${{ secrets.GITHUB_TOKEN }}
         ManagedDb.PathToSave: ${{ github.workspace }}/data.json
         ManagedDb.RepoPath: ${{ github.workspace }}
-    - name: Show appsettings.json
-      run: cat ${{ github.workspace }}/output/appsettings.json
     - name: Run Changes Generator
       run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient
     - name: Archive Changes Generator data

@@ -30,7 +30,7 @@ public class GitHubPullRequestService : IPullRequestService
         var result = new List<EntityChange>();
 
         var filteredData = data
-            .Where(x => x.FileName.EndsWith("csv"))
+            .Where(x => x.FileName != null && x.FileName.EndsWith("csv"))
             .ToArray();
 
         foreach(var changedFile in filteredData) 
@@ -44,12 +44,12 @@ public class GitHubPullRequestService : IPullRequestService
 
     private EntityChange[] ParseChanges(GitHubPullRequestResponseModel changedFile)
     {
-        var name = this.GetFileName(changedFile.FileName);
+        var name = this.GetFileName(changedFile.FileName ?? string.Empty);
         var path = changedFile.FileName;
 
         var headers = this.GetHeaders(changedFile);
 
-        var diffOutput = changedFile.Patch;
+        var diffOutput = changedFile.Patch ?? string.Empty;
 
         var lines = diffOutput.Split('\n');
 
@@ -109,7 +109,7 @@ public class GitHubPullRequestService : IPullRequestService
 
             result.Add(new EntityChange(
                 name,
-                path,
+                path ?? string.Empty,
                 addedRow.RowNumber,
                 EntityChangeTypeEnum.Added,
                 originalFields));
@@ -128,7 +128,7 @@ public class GitHubPullRequestService : IPullRequestService
 
             result.Add(new EntityChange(
                 name,
-                path,
+                path ?? string.Empty,
                 removedRow.RowNumber,
                 EntityChangeTypeEnum.Removed,
                 originalFields));
@@ -159,7 +159,7 @@ public class GitHubPullRequestService : IPullRequestService
 
             result.Add(new EntityChange(
                 name,
-                path,
+                path ?? string.Empty,
                 updatedRow.RowNumber,
                 EntityChangeTypeEnum.Updated,
                 originalFields,
@@ -171,7 +171,7 @@ public class GitHubPullRequestService : IPullRequestService
 
     private string[] GetHeaders(GitHubPullRequestResponseModel changedFile) 
     {
-        var headers = changedFile.Patch
+        var headers = (changedFile.Patch ?? string.Empty)
             .Split('\n')[1]
             .Split(",")
             .Select(x => x.Trim())
@@ -194,20 +194,20 @@ public class GitHubPullRequestService : IPullRequestService
         var url = $"repos/{this.options.Value.Project}/{this.options.Value.Repository}/pulls/{this.options.Value.PrId}/files";
         var response = await this.ghClient
             .GetFromJsonAsync<GitHubPullRequestResponseModel[]>(url);
-        return response;
+        return response ?? Array.Empty< GitHubPullRequestResponseModel>();
     }
 }
 
 public class GitHubPullRequestResponseModel 
 {
     [JsonPropertyName("sha")]
-    public string Sha { get; set; }
+    public string? Sha { get; set; }
 
     [JsonPropertyName("filename")]
-    public string FileName { get; set; }
+    public string? FileName { get; set; }
 
     [JsonPropertyName("status")]
-    public string Status { get; set; }
+    public string? Status { get; set; }
 
     [JsonPropertyName("additions")]
     public int Additions { get; set; }
@@ -219,14 +219,14 @@ public class GitHubPullRequestResponseModel
     public int Changes { get; set; }
 
     [JsonPropertyName("blob_url")]
-    public string BlobUrl { get; set; }
+    public string? BlobUrl { get; set; }
 
     [JsonPropertyName("raw_url")]
-    public string RawUrl { get; set; }
+    public string? RawUrl { get; set; }
 
     [JsonPropertyName("contents_url")]
-    public string ContentsUrl { get; set; }
+    public string? ContentsUrl { get; set; }
 
     [JsonPropertyName("patch")]
-    public string Patch { get; set; }
+    public string? Patch { get; set; }
 }

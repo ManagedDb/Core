@@ -35,7 +35,7 @@ namespace ManagedDb.Core
             {
                 var mdbOptions = serviceProvider.GetRequiredService<IOptions<ManagedDbOptions>>();
 
-                httpClient.BaseAddress = new Uri(mdbOptions.Value.GitHubBaseUrl);
+                httpClient.BaseAddress = new Uri(mdbOptions.Value.GitHubBaseUrl ?? string.Empty);
 
                 httpClient.DefaultRequestHeaders.Add(
                     "Accept", 
@@ -58,19 +58,19 @@ namespace ManagedDb.Core
     {
         public const string ConfigKey = "ManagedDb";
 
-        public string GitHubBaseUrl { get; set; }
+        public string? GitHubBaseUrl { get; set; }
 
-        public string Project { get; set; }
+        public string? Project { get; set; }
 
-        public string Repository { get; set; }
+        public string? Repository { get; set; }
 
         public int PrId { get; set; }
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
-        public string PathToSave { get; set; }
+        public string? PathToSave { get; set; }
 
         [Obsolete]
-        public string RepoPath { get; set; }
+        public string? RepoPath { get; set; }
     }
 }
