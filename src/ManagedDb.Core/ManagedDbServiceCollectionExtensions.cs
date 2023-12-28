@@ -39,16 +39,22 @@ namespace ManagedDb.Core
                 Console.WriteLine("0.4");
                 httpClient.BaseAddress = new Uri(mdbOptions?.Value?.GitHubBaseUrl);
 
+                Console.WriteLine("0.5");
                 httpClient.DefaultRequestHeaders.Add(
                     "Accept", 
                     "application/vnd.github.v3+json");
+
+                Console.WriteLine("0.6");
                 httpClient.DefaultRequestHeaders.Add(
                     "User-Agent", 
                     "HttpRequestsSample");
 
+                Console.WriteLine("0.7");
                 httpClient.DefaultRequestHeaders.Add(
                     "Authorization",
                     $"Bearer {mdbOptions?.Value?.Token}");
+
+                Console.WriteLine("0.8");
             });
 
             return services;
