@@ -49,6 +49,8 @@ jobs:
         ManagedDb__Token: ${{ secrets.GITHUB_TOKEN }}
         ManagedDb__PathToSave: ${{ github.workspace }}/data.json
         ManagedDb__RepoPath: ${{ github.workspace }}
+    - name: Show appsettings.json
+      run: cat ${{ github.workspace }}/output/appsettings.json
     - name: Run Changes Generator
       run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient
     - name: Archive Changes Generator data
