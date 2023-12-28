@@ -19,9 +19,7 @@ public class GitHubPullRequestService : IPullRequestService
         IHttpClientFactory httpClientFactory,
         IOptions<ManagedDbOptions> options)
     {
-        Console.WriteLine("0.1");
         this.ghClient = httpClientFactory.CreateClient("github");
-        Console.WriteLine("0.2");
         this.options = options;
     }
 

@@ -27,8 +27,6 @@ public class GetLatestChangesCommand
 
     public async Task Handle()
     {
-        Console.WriteLine("2.1");
-
         var pathToSave = options?.Value?.PathToSave;
         var repoPath = options?.Value?.RepoPath;
 
@@ -38,8 +36,6 @@ public class GetLatestChangesCommand
         var changes = await this.prService
             .GetChangesAsync(GetChangesModeEnum.MainBranch);
 
-        Console.WriteLine("2.2");
-
         var jsonSerializerOptions = new JsonSerializerOptions
         {
             WriteIndented = true
@@ -48,8 +44,6 @@ public class GetLatestChangesCommand
         var jsonContent = JsonSerializer.Serialize(
             changes,
             jsonSerializerOptions);
-
-        Console.WriteLine("2.3");
 
         if (string.IsNullOrWhiteSpace(pathToSave))
         {
@@ -65,13 +59,9 @@ public class GetLatestChangesCommand
             Directory.CreateDirectory(dirNames);
         }
 
-        Console.WriteLine("2.4");
-
         File.WriteAllText(
             pathToSave,
             jsonContent);
-
-        Console.WriteLine("2.5");
     }
 }
 
