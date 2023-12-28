@@ -2,7 +2,7 @@
   "profiles": {
     "ManagedDb.ConsoleClient": {
       "commandName": "Project",
-      "commandLineArgs": "$(ChangeMode) $(DataOutputPath) $(MDBRootFolder)",
+      "commandLineArgs": "github --path-to-save $(DataOutputPath) --repo-path $(MDBRootFolder)",
       "environmentVariables": {
         "MDBRootFolder": "$(MDBRootFolder)"
       }

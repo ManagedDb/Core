@@ -28,8 +28,25 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Get owner and repo
+      run: |
+        REPO=${{ github.repository }}
+        IFS='/' read -ra ADDR <<< "$REPO"
+        OWNER=${ADDR[0]}
+        REPO_NAME=${ADDR[1]}
+        echo "OWNER=$OWNER" >> $GITHUB_ENV
+        echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+    - name: App Settings Variable Substitution
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '${{ github.workspace }}/src/ManagedDb.ConsoleClient/appsettings.json'
+      env:
+        ManagedDb.Project: ${{ env.OWNER }}
+        ManagedDb.Repository: ${{ env.REPO_NAME }}
+        ManagedDb.PrId: ${{ github.event.pull_request.number }}
+        ManagedDb.Token: ${{ secrets.GITHUB_TOKEN }}
     - name: Run Changes Generator
-      run: dotnet run -c Release --project ${{ github.workspace }}/src/ManagedDb.ConsoleClient/ManagedDb.ConsoleClient.csproj -- commit ${{ github.workspace }}/data.json ${{ github.workspace }}
+      run: dotnet run -c Release --project ${{ github.workspace }}/src/ManagedDb.ConsoleClient/ManagedDb.ConsoleClient.csproj -- github --path-to-save ${{ github.workspace }}/data.json --repo-path ${{ github.workspace }}
     - name: Archive Changes Generator data
       uses: actions/upload-artifact@v3
       with:
