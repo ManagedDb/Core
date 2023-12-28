@@ -74,3 +74,13 @@ public class GetLatestChangesCommand
         Console.WriteLine("2.5");
     }
 }
+
+public class MyDummyCommand 
+{
+    public Task Handle() 
+    {
+        Console.WriteLine("Hello world!!!");
+
+        return Task.CompletedTask; 
+    }
+}

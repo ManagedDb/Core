@@ -28,7 +28,9 @@ var app = builder.Build();
 
 Console.WriteLine("1.6");
 
-app.AddCommands<GetLatestChangesCommand>();
+app.AddCommands<MyDummyCommand>();
+
+//app.AddCommands<GetLatestChangesCommand>();
 
 Console.WriteLine("1.7");
 
