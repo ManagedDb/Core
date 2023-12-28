@@ -33,20 +33,28 @@ namespace ManagedDb.Core
 
             services.AddHttpClient("github", (serviceProvider, httpClient) =>
             {
+                Console.WriteLine("0.3");
                 var mdbOptions = serviceProvider.GetRequiredService<IOptions<ManagedDbOptions>>();
 
-                httpClient.BaseAddress = new Uri(mdbOptions?.Value?.GitHubBaseUrl);
+                Console.WriteLine("0.4");
+                httpClient.BaseAddress = new Uri("https://api.github.com/");
 
+                Console.WriteLine("0.5");
                 httpClient.DefaultRequestHeaders.Add(
                     "Accept", 
                     "application/vnd.github.v3+json");
+
+                Console.WriteLine("0.6");
                 httpClient.DefaultRequestHeaders.Add(
                     "User-Agent", 
                     "HttpRequestsSample");
 
+                Console.WriteLine("0.7");
                 httpClient.DefaultRequestHeaders.Add(
                     "Authorization",
                     $"Bearer {mdbOptions?.Value?.Token}");
+
+                Console.WriteLine("0.8");
             });
 
             return services;
@@ -66,5 +74,9 @@ namespace ManagedDb.Core
         public int PrId { get; set; }
 
         public string Token { get; set; }
+
+        public string PathToSave { get; set; }
+
+        public string RepoPath { get; set; }
     }
 }
