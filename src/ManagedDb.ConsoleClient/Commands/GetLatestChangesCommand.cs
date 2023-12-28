@@ -15,10 +15,14 @@ public class GetLatestChangesCommand
     private readonly ILogger<GetLatestChangesCommand> logger;
 
     public GetLatestChangesCommand(
-        IPullRequestService prService)
+        IPullRequestService prService,
+        IOptions<ManagedDbOptions> options,
+        ILogger<GetLatestChangesCommand> logger)
     {
         Console.WriteLine("2.0");
         this.prService = prService;
+        this.options = options;
+        this.logger = logger;
     }
 
     public async Task Handle()
