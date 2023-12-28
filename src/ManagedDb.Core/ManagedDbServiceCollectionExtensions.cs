@@ -33,10 +33,10 @@ namespace ManagedDb.Core
 
             services.AddHttpClient("github", (serviceProvider, httpClient) =>
             {
-                Console.WriteLine("0.2");
+                Console.WriteLine("0.3");
                 var mdbOptions = serviceProvider.GetRequiredService<IOptions<ManagedDbOptions>>();
 
-                Console.WriteLine("0.3");
+                Console.WriteLine("0.4");
                 httpClient.BaseAddress = new Uri(mdbOptions?.Value?.GitHubBaseUrl);
 
                 httpClient.DefaultRequestHeaders.Add(
