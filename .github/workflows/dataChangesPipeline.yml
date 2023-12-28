@@ -46,7 +46,6 @@ jobs:
         ManagedDb.Project: ${{ env.OWNER }}
         ManagedDb.Repository: ${{ env.REPO_NAME }}
         ManagedDb.PrId: ${{ github.event.pull_request.number }}
-        ManagedDb.Token: ${{ secrets.GITHUB_TOKEN }}
     - name: Run Changes Generator
       run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient github --path-to-save ${{ github.workspace }}/data.json --repo-path ${{ github.workspace }}
     - name: Archive Changes Generator data
