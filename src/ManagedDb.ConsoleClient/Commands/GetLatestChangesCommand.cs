@@ -24,7 +24,6 @@ public class GetLatestChangesCommand
         this.logger = logger;
     }
 
-    [Command("github")]
     public async Task Handle()
     {
         var pathToSave = options?.Value?.PathToSave;
