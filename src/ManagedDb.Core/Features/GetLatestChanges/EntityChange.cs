@@ -1,4 +1,4 @@
-﻿namespace ManagedDb.Core.Features.GetLatestChanges;
+﻿namespace ManagedDb.Core.Features.PullRequests;
 
 public record EntityChange(
     string Name,
@@ -13,4 +13,10 @@ public enum EntityChangeTypeEnum
     Added = 1,
     Updated,
     Removed
+}
+
+public enum GetChangesModeEnum
+{
+    LastCommit,
+    MainBranch
 }

@@ -1,20 +1,20 @@
 ﻿using LibGit2Sharp;
 
-namespace ManagedDb.Core.Features.GetLatestChanges;
+namespace ManagedDb.Core.Features.PullRequests;
 
-public class GetLatestChangesService
+public class LocalPullRequestService
 {
     private readonly string dataFolderName = @"data";
     private readonly string fileExtension = ".csv";
     private readonly string repoPath;
     private readonly string mainBranchName = "main";
 
-    public GetLatestChangesService(string repoPath)
+    public LocalPullRequestService(string repoPath)
     {
         this.repoPath = repoPath;
     }
 
-    public GetLatestChangesService()
+    public LocalPullRequestService()
     {
         var currentDir = Environment.CurrentDirectory;
         var dir = new DirectoryInfo(currentDir);
@@ -32,7 +32,7 @@ public class GetLatestChangesService
         this.repoPath = dir.FullName;
     }
 
-    public ICollection<EntityChange> GetChanges(GetChangesModeEnum mode)
+    public Task<EntityChange[]> GetChangesAsync(GetChangesModeEnum mode)
     {
         using var repo = new Repository(this.repoPath);
 
@@ -40,12 +40,12 @@ public class GetLatestChangesService
             ? this.GetChangesBasedOnLastCommit(repo)
             : this.GetChangesBasedOnMainBranch(repo);
 
-        var result = new List<EntityChange>();
-
-        if (patches == null)
+        if(patches == null) 
         {
-            return result;
+            return Task.FromResult(Array.Empty<EntityChange>());
         }
+
+        var result = new List<EntityChange>();
 
         foreach (var entityPatch in patches)
         {
@@ -76,7 +76,7 @@ public class GetLatestChangesService
             result.AddRange(removedEntities);
         }
 
-        return result;
+        return Task.FromResult(result.ToArray());
     }
 
     private EntityChange[] HandleLines(
@@ -217,8 +217,4 @@ public class GetLatestChangesService
     }
 }
 
-public enum GetChangesModeEnum
-{
-    LastCommit,
-    MainBranch
-}
+
