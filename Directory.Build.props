@@ -1,5 +1,8 @@
 <Project>
     <PropertyGroup>
         <MDBRootFolder>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</MDBRootFolder>
+        <MDBDataFolder>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))\\data</MDBRootFolder>
+        <MDBConfigFilePath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))\\data\\mdb.config.json</MDBConfigFilePath>
+        <MDBEntitySchemaFileName>mdb.entity.schema.json</MDBEntitySchemaFileName>
     </PropertyGroup>
 </Project>

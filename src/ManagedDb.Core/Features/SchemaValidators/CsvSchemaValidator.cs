@@ -17,21 +17,20 @@ namespace ManagedDb.Core.Features.SchemaValidators
             this.logger = logger;
         }
 
-        public bool Validate(
+        public async Task<bool> ValidateAsync(
             string pathToCsv, 
             string pathToEntitySchema) 
         {
-            this.LogEntityFile(pathToCsv);
+            var schema = await this.GetSchemaAsync(pathToEntitySchema);
+
+            if (schema == null) 
+            {
+                return true;
+            }
+
             this.LogEntityFile(pathToEntitySchema);
 
-            return this.InternalValidate(
-                pathToCsv, 
-                pathToEntitySchema);
-        }
-
-        private bool InternalValidate(string pathToCsv, string pathToEntitySchema) 
-        {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
         private void LogEntityFile(string pathToCsv) => 
@@ -43,5 +42,18 @@ namespace ManagedDb.Core.Features.SchemaValidators
             this.logger.LogDebug("{entityFile} is exist: {isExist}",
                 pathToEntitySchema,
                 File.Exists(pathToEntitySchema));
+
+        private async Task<EntitySchema?> GetSchemaAsync(string pathToEntitySchema) 
+        {
+            this.LogEntitySchema(pathToEntitySchema);
+
+            if (!File.Exists(pathToEntitySchema))
+            {
+                return null;
+            }
+
+            var schema = await File.ReadAllTextAsync(pathToEntitySchema);
+            return System.Text.Json.JsonSerializer.Deserialize<EntitySchema>(schema);
+        }
     }
 }

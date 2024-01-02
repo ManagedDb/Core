@@ -1,0 +1,8 @@
+{
+    "dbType": "csv",
+    "featureFlags": {
+        "produceChanges": true,
+        "generateSqlLiteDb": false,
+        "generateWebApi": false
+    }
+}

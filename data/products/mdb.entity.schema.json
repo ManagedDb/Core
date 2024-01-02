@@ -1,0 +1,26 @@
+{
+    "entityName": "product",
+    "fields:": {
+        "id": {
+            "fieldType": "int",
+            "isRequired": true,
+            "order": 0,
+            "isPk": true
+        },
+        "title": {
+            "fieldType": "string",
+            "isRequired": true,
+            "order": 1
+        },
+        "category": {
+            "fieldType": "string",
+            "isRequired": true,
+            "order": 2
+        },
+        "price": {
+            "fieldType": "int",
+            "isRequired": true,
+            "order": 3
+        }
+    }
+}
