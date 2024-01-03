@@ -1,8 +1,9 @@
 ﻿using LibGit2Sharp;
+using ManagedDb.Core.Features.GetLatestChanges;
 
 namespace ManagedDb.Core.Features.PullRequests;
 
-public class LocalPullRequestService
+public class LocalPullRequestService : IPullRequestService
 {
     private readonly string dataFolderName = @"data";
     private readonly string fileExtension = ".csv";

@@ -4,6 +4,7 @@ using ManagedDb.Core.Features.GetLatestChanges;
 using ManagedDb.Core.Features.PullRequests;
 using ManagedDb.Core.Features.SchemaConvertors;
 using ManagedDb.Core.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
@@ -18,7 +19,7 @@ public class GitHubPrChangesV2Command
     private readonly ILogger<GitHubPrChangesV2Command> logger;
 
     public GitHubPrChangesV2Command(
-        IPullRequestService prService,
+        [FromKeyedServices("local")]IPullRequestService prService,
         SchemaConvertor schemaConvertor,
         IOptions<ManagedDbOptions> options,
         ILogger<GitHubPrChangesV2Command> logger)
@@ -42,7 +43,7 @@ public class GitHubPrChangesV2Command
         var converted = this.schemaConvertor.ConvertBySchemaAsync(changes);
 
         var jsonContent = JsonSerializer.Serialize(
-            changes,
+            converted,
             MdbHelper.GetJsonSerializerOptions);
 
         if (string.IsNullOrWhiteSpace(pathToSave))

@@ -3,6 +3,7 @@ using ManagedDb.Core;
 using ManagedDb.Core.Features.GetLatestChanges;
 using ManagedDb.Core.Features.PullRequests;
 using ManagedDb.Core.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
@@ -16,7 +17,7 @@ public class GitHubPrChangesV1Command
     private readonly ILogger<GitHubPrChangesV1Command> logger;
 
     public GitHubPrChangesV1Command(
-        IPullRequestService prService,
+        [FromKeyedServices("github")] IPullRequestService prService,
         IOptions<ManagedDbOptions> options,
         ILogger<GitHubPrChangesV1Command> logger)
     {

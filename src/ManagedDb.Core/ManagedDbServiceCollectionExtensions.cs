@@ -1,4 +1,5 @@
 ﻿using ManagedDb.Core.Features.GetLatestChanges;
+using ManagedDb.Core.Features.PullRequests;
 using ManagedDb.Core.Features.SchemaConvertors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,8 @@ namespace ManagedDb.Core
                     });
             }
 
-            services.AddScoped<IPullRequestService, GitHubPullRequestService>();
+            services.AddKeyedScoped<IPullRequestService, LocalPullRequestService>("local");
+            services.AddKeyedScoped<IPullRequestService, GitHubPullRequestService>("github");
 
             services.AddHttpClient("github", (serviceProvider, httpClient) =>
             {
