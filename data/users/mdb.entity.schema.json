@@ -18,10 +18,9 @@
             "order": 2
         },
         "dateBirth": {
-            "fieldType": "datetime",
+            "fieldType": "string",
             "isRequired": true,
-            "order": 3,
-            "format": "yyyy.MM.dd"
+            "order": 3
         }
     }
 }
