@@ -1,0 +1,26 @@
+{
+    "entityName": "todo",
+    "fields:": {
+        "id": {
+            "fieldType": "int",
+            "isRequired": true,
+            "order": 0,
+            "isPk": true
+        },
+        "title": {
+            "fieldType": "string",
+            "isRequired": true,
+            "order": 1
+        },
+        "rank": {
+            "fieldType": "string",
+            "isRequired": true,
+            "order": 2
+        },
+        "isDone": {
+            "fieldType": "bool",
+            "isRequired": true,
+            "order": 2
+        }
+    }
+}
