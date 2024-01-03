@@ -25,6 +25,7 @@ builder.Services.AddManagedDb();
 
 var app = builder.Build();
 
-app.AddCommands<GetLatestChangesCommand>();
+app.AddCommands<GitHubPrChangesV1Command>();
+app.AddCommands<GitHubPrChangesV2Command>();
 
 app.Run();

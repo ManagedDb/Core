@@ -7,15 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E070EDAE-B93
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8C6F3D06-8390-4559-B738-49A57B25C100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedDb.Core", "src\ManagedDb.Core\ManagedDb.Core.csproj", "{36715267-D759-449C-B360-00C89C163BD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagedDb.Core", "src\ManagedDb.Core\ManagedDb.Core.csproj", "{36715267-D759-449C-B360-00C89C163BD1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "units", "units", "{B0FA29D4-A825-4774-B2A5-9421939C7700}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "e2e", "e2e", "{F3729F40-DC2F-48B3-ADE5-C5C67911DC01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedDb.Core.Units", "tests\units\ManagedDb.Core.Units\ManagedDb.Core.Units.csproj", "{5B142348-6C3E-4598-BCD4-A205A0EB3678}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagedDb.Core.Units", "tests\units\ManagedDb.Core.Units\ManagedDb.Core.Units.csproj", "{5B142348-6C3E-4598-BCD4-A205A0EB3678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedDb.ConsoleClient", "src\ManagedDb.ConsoleClient\ManagedDb.ConsoleClient.csproj", "{B106800E-6CBA-4811-BA3E-60D9315FAA4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagedDb.ConsoleClient", "src\ManagedDb.ConsoleClient\ManagedDb.ConsoleClient.csproj", "{B106800E-6CBA-4811-BA3E-60D9315FAA4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
 ﻿using ManagedDb.Core.Features.GetLatestChanges;
+using ManagedDb.Core.Features.SchemaConvertors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -16,6 +17,7 @@ namespace ManagedDb.Core
             this IServiceCollection services,
             IOptions<ManagedDbOptions>? options = null) 
         {
+            // register latest changes services
             if (options != null) 
             {
                 services.AddOptions<ManagedDbOptions>()
@@ -50,27 +52,54 @@ namespace ManagedDb.Core
                     $"Bearer {mdbOptions.Value.Token}");
             });
 
+            // register schema
+            services.AddScoped<SchemaProvider>();
+            services.AddScoped<SchemaConvertor>();
+
             return services;
         }
     }
 
     public class ManagedDbOptions
     {
+        /// <summary>
+        /// Key in appsettings.json file.
+        /// </summary>
         public const string ConfigKey = "ManagedDb";
 
+        /// <summary>
+        /// Url for github.
+        /// </summary>
         public string? GitHubBaseUrl { get; set; }
 
+        /// <summary>
+        /// Github project name.
+        /// </summary>
         public string? Project { get; set; }
 
+        /// <summary>
+        /// Github repo name.
+        /// </summary>
         public string? Repository { get; set; }
 
+        /// <summary>
+        /// PR id. The changes will be recieved by this id.
+        /// </summary>
         public int PrId { get; set; }
 
+        /// <summary>
+        /// GitHub token.
+        /// </summary>
         public string? Token { get; set; }
 
+        /// <summary>
+        /// Place to save changes.json file.
+        /// </summary>
         public string? PathToSave { get; set; }
 
-        [Obsolete]
+        /// <summary>
+        /// Current repo path.
+        /// </summary>
         public string? RepoPath { get; set; }
     }
 }

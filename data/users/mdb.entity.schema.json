@@ -1,6 +1,6 @@
 {
     "entityName": "user",
-    "fields:": {
+    "fields": {
         "id": {
             "fieldType": "int",
             "isRequired": true,

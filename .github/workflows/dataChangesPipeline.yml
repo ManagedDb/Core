@@ -48,7 +48,7 @@ jobs:
         ManagedDb.PathToSave: ${{ github.workspace }}/data.json
         ManagedDb.RepoPath: ${{ github.workspace }}
     - name: Run Changes Generator
-      run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient
+      run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient githubprchangesv1
     - name: Archive Changes Generator data
       uses: actions/upload-artifact@v3
       with:

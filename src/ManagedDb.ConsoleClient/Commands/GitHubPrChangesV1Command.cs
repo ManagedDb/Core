@@ -8,22 +8,23 @@ using System.Text.Json;
 
 namespace ManagedDb.ConsoleClient.Commands;
 
-public class GetLatestChangesCommand
+public class GitHubPrChangesV1Command
 {
     private readonly IPullRequestService prService;
     private readonly IOptions<ManagedDbOptions> options;
-    private readonly ILogger<GetLatestChangesCommand> logger;
+    private readonly ILogger<GitHubPrChangesV1Command> logger;
 
-    public GetLatestChangesCommand(
+    public GitHubPrChangesV1Command(
         IPullRequestService prService,
         IOptions<ManagedDbOptions> options,
-        ILogger<GetLatestChangesCommand> logger)
+        ILogger<GitHubPrChangesV1Command> logger)
     {
         this.prService = prService;
         this.options = options;
         this.logger = logger;
     }
 
+    [Command("githubprchangesv1")]
     public async Task Handle()
     {
         var pathToSave = options.Value.PathToSave;

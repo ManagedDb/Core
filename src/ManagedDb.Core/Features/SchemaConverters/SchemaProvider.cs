@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ManagedDb.Core.Features.SchemaConverters;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
 
 namespace ManagedDb.Core.Features.SchemaConvertors
@@ -6,12 +8,18 @@ namespace ManagedDb.Core.Features.SchemaConvertors
     public class SchemaProvider
     {
         private const string EntitySchemaFileName = "mdb.entity.schema.json";
+        
         private readonly ILogger<SchemaProvider> logger;
+        private readonly IOptions<ManagedDbOptions> options;
+
         private Dictionary<string, EntitySchema> schemas = new();
 
-        public SchemaProvider(ILogger<SchemaProvider> logger)
+        public SchemaProvider(
+            ILogger<SchemaProvider> logger,
+            IOptions<ManagedDbOptions> options)
         {
             this.logger = logger;
+            this.options = options;
         }
 
         /// <summary>
@@ -19,7 +27,7 @@ namespace ManagedDb.Core.Features.SchemaConvertors
         /// </summary>
         /// <param name="pathToCsv">../data/{entityName}/{entityName}.csv</param>
         /// <returns></returns>
-        public async Task<EntitySchema?> GetSchemaAsync(string pathToCsv)
+        public virtual async Task<EntitySchema?> GetSchemaAsync(string pathToCsv)
         {
             var pathToEntitySchema = this.GetSchemaPath(pathToCsv);
 
@@ -35,7 +43,10 @@ namespace ManagedDb.Core.Features.SchemaConvertors
             if(entity == null)
             {
                 var schema = await File.ReadAllTextAsync(pathToEntitySchema);
-                entity = JsonSerializer.Deserialize<EntitySchema>(schema);
+                entity = JsonSerializer.Deserialize<EntitySchema>(schema, new JsonSerializerOptions() 
+                {
+                    PropertyNameCaseInsensitive = true
+                });
 
                 this.ValidateSchema(entity);
 
@@ -86,7 +97,9 @@ namespace ManagedDb.Core.Features.SchemaConvertors
             }
 
             if (isIncorrect)
-                throw new Exception("Incorrect schema");
+                throw new SchemaIsIncorrectException(
+                    "Incorrect schema", 
+                    schema.EntityName);
         }
 
         private void AddSchema(string pathToSchema, EntitySchema schema) =>
@@ -97,9 +110,11 @@ namespace ManagedDb.Core.Features.SchemaConvertors
 
         private string GetSchemaPath(string pathToCsv) 
         {
-            // pathToCsv = "C://myRepo//data//{entityName}//data.csv".
+            // pathToCsv = "//data//{entityName}//data.csv".
+            // fullPath will be combined with curret repo path.
             // extract {entityName} from pathToCsv?
-            var dir = Directory.GetParent(pathToCsv).FullName;
+            var fullpath = Path.Combine(this.options.Value.RepoPath, pathToCsv);
+            var dir = Directory.GetParent(fullpath).FullName;
             return Path.Combine(dir, EntitySchemaFileName);
         }
 
