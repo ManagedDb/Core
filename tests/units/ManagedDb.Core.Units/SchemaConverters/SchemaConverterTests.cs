@@ -1,6 +1,7 @@
 ﻿using ManagedDb.Core.Features.PullRequests;
 using ManagedDb.Core.Features.SchemaConverters;
 using ManagedDb.Core.Features.SchemaConvertors;
+using ManagedDb.Core.Helpers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -49,10 +50,7 @@ public class SchemaConverterTests
         var schemaContent = await File.ReadAllTextAsync(schemaPath);
         var schema = JsonSerializer.Deserialize<EntitySchema>(
             schemaContent,
-            new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            MdbHelper.GetJsonSerializerOptions);
 
         this.providerMock
             .Setup(s => s
@@ -98,10 +96,7 @@ public class SchemaConverterTests
         var schemaContent = await File.ReadAllTextAsync(schemaPath);
         var schema = JsonSerializer.Deserialize<EntitySchema>(
             schemaContent,
-            new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            MdbHelper.GetJsonSerializerOptions);
 
         this.providerMock
             .Setup(s => s
@@ -139,10 +134,7 @@ public class SchemaConverterTests
         var schemaContent = await File.ReadAllTextAsync(schemaPath);
         var schema = JsonSerializer.Deserialize<EntitySchema>(
             schemaContent,
-            new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            MdbHelper.GetJsonSerializerOptions);
 
         this.providerMock
             .Setup(s => s

@@ -2,6 +2,7 @@
 using ManagedDb.Core;
 using ManagedDb.Core.Features.GetLatestChanges;
 using ManagedDb.Core.Features.PullRequests;
+using ManagedDb.Core.Helpers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
@@ -34,14 +35,9 @@ public class GitHubPrChangesV1Command
         var changes = await this.prService
             .GetChangesAsync(GetChangesModeEnum.MainBranch);
 
-        var jsonSerializerOptions = new JsonSerializerOptions
-        {
-            WriteIndented = true
-        };
-
         var jsonContent = JsonSerializer.Serialize(
             changes,
-            jsonSerializerOptions);
+            MdbHelper.GetJsonSerializerOptions);
 
         if (string.IsNullOrWhiteSpace(pathToSave))
         {

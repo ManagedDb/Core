@@ -3,6 +3,7 @@ using ManagedDb.Core;
 using ManagedDb.Core.Features.GetLatestChanges;
 using ManagedDb.Core.Features.PullRequests;
 using ManagedDb.Core.Features.SchemaConvertors;
+using ManagedDb.Core.Helpers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
@@ -40,14 +41,9 @@ public class GitHubPrChangesV2Command
 
         var converted = this.schemaConvertor.ConvertBySchemaAsync(changes);
 
-        var jsonSerializerOptions = new JsonSerializerOptions
-        {
-            WriteIndented = true
-        };
-
         var jsonContent = JsonSerializer.Serialize(
             changes,
-            jsonSerializerOptions);
+            MdbHelper.GetJsonSerializerOptions);
 
         if (string.IsNullOrWhiteSpace(pathToSave))
         {

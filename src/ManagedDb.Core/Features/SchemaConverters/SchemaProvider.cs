@@ -1,4 +1,5 @@
 ﻿using ManagedDb.Core.Features.SchemaConverters;
+using ManagedDb.Core.Helpers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
@@ -43,10 +44,9 @@ namespace ManagedDb.Core.Features.SchemaConvertors
             if(entity == null)
             {
                 var schema = await File.ReadAllTextAsync(pathToEntitySchema);
-                entity = JsonSerializer.Deserialize<EntitySchema>(schema, new JsonSerializerOptions() 
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+                entity = JsonSerializer.Deserialize<EntitySchema>(
+                    schema, 
+                    MdbHelper.GetJsonSerializerOptions);
 
                 this.ValidateSchema(entity);
 
