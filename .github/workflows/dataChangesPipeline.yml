@@ -54,7 +54,7 @@ jobs:
     - name: Archive Changes Generator data
       uses: actions/upload-artifact@v3
       with:
-        name: mdg_report
+        name: mdb_report
         path: ${{ github.workspace }}/data.json
     - name: Display data in table format
       run: cat ${{ github.workspace }}/data.json | jq -r '.[] | [.Name, .Path, .RowNumber, .ChangeType] | @tsv' | column -t
@@ -63,5 +63,5 @@ jobs:
     - name: Archive Db Generator data
       uses: actions/upload-artifact@v3
       with:
-        name: mdb_report
+        name: mdb_db
         path: ${{ github.workspace }}/mdb.md
