@@ -1,4 +1,5 @@
-﻿using ManagedDb.Core.Features.GetLatestChanges;
+﻿using ManagedDb.Core.Features.GenerateDbs;
+using ManagedDb.Core.Features.GetLatestChanges;
 using ManagedDb.Core.Features.PullRequests;
 using ManagedDb.Core.Features.SchemaConvertors;
 using Microsoft.Extensions.Configuration;
@@ -57,6 +58,9 @@ namespace ManagedDb.Core
             // register schema
             services.AddScoped<SchemaProvider>();
             services.AddScoped<SchemaConvertor>();
+
+            // register db generator
+            services.AddScoped<DbGenerator>();
 
             return services;
         }
