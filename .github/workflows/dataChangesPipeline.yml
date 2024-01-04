@@ -47,6 +47,8 @@ jobs:
         ManagedDb.Token: ${{ secrets.GITHUB_TOKEN }}
         ManagedDb.PathToSave: ${{ github.workspace }}/data.json
         ManagedDb.RepoPath: ${{ github.workspace }}
+        ManagedDb.DataFolderPath: ${{ github.workspace }}/data
+        ManagedDb.DbPath: ${{ github.workspace }}/mdb.md
     - name: Run Changes Generator
       run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient githubprchangesv1
     - name: Archive Changes Generator data
@@ -56,3 +58,10 @@ jobs:
         path: ${{ github.workspace }}/data.json
     - name: Display data in table format
       run: cat ${{ github.workspace }}/data.json | jq -r '.[] | [.Name, .Path, .RowNumber, .ChangeType] | @tsv' | column -t
+    - name: Run Db Generator
+      run: ${{ github.workspace }}/output/ManagedDb.ConsoleClient createdb
+    - name: Archive Db Generator data
+      uses: actions/upload-artifact@v3
+      with:
+        name: mdb_report
+        path: ${{ github.workspace }}/mdb.md

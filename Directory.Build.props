@@ -3,6 +3,7 @@
         <MDBRootFolder>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</MDBRootFolder>
         <MDBDataFolder>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))\\data</MDBDataFolder>
         <MDBConfigFilePath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))\\data\\mdb.config.json</MDBConfigFilePath>
+        <MDBDataPath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))\\data</MDBDataPath>
         <MDBEntitySchemaFileName>mdb.entity.schema.json</MDBEntitySchemaFileName>
     </PropertyGroup>
 </Project>
