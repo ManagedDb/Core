@@ -1,4 +1,5 @@
 id,title,rank,isDone
 1,Learn English,5,false
-2,Visit the store,3,false
-3,Watch a movie,2,false
+2,Visit the store,2,false
+3,Watch the movie,2,true
+4,Buy a game console,4,false
