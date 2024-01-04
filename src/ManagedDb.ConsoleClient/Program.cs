@@ -25,7 +25,11 @@ builder.Services.AddManagedDb();
 
 var app = builder.Build();
 
+// add pr changes command
 app.AddCommands<GitHubPrChangesV1Command>();
 app.AddCommands<GitHubPrChangesV2Command>();
+
+// add create db command
+app.AddCommands<CreateDbCommand>();
 
 app.Run();

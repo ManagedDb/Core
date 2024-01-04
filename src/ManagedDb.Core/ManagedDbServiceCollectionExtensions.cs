@@ -103,5 +103,15 @@ namespace ManagedDb.Core
         /// Current repo path.
         /// </summary>
         public string? RepoPath { get; set; }
+
+        /// <summary>
+        /// Place for data folder to get entities and data.
+        /// </summary>
+        public string? DataFolderPath { get; set; }
+
+        /// <summary>
+        /// Path to save generated db.
+        /// </summary>
+        public string? DbPath { get; set; }
     }
 }

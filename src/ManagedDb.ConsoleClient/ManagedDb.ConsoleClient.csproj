@@ -8,6 +8,8 @@
     <MDBRootFolder>$(MDBRootFolder)</MDBRootFolder>
     <DataOutputPath>data1.json</DataOutputPath>
     <ChangeMode>commit</ChangeMode>
+    <MDBDataPath>$(MDBDataPath)</MDBDataPath>
+    <DbPath>mdb.db</DbPath>
   </PropertyGroup>
 
   <ItemGroup>
