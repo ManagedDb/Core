@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text.Json;
-using System.Xml.Serialization;
 using System.CodeDom;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
@@ -52,7 +51,10 @@ namespace ManagedDb.Core.Features.DataProxyCreators
                 TypeAttributes = TypeAttributes.Public,
                 BaseTypes = { new CodeTypeReference(typeof(MdbBaseEntity)) }
             };
-            classType.CustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(TableAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(entityName))));
+            classType.CustomAttributes.Add(
+                new CodeAttributeDeclaration(
+                    new CodeTypeReference(typeof(TableAttribute)), 
+                    new CodeAttributeArgument(new CodePrimitiveExpression(entitySchema.EntityName))));
 
             foreach (var field in entitySchema.Fields)
             {

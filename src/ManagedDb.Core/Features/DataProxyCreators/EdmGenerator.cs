@@ -1,9 +1,7 @@
 ﻿
 using Microsoft.OData.Edm;
-using System.Reflection;
-using System.Linq;
 using Microsoft.OData.ModelBuilder;
-using System.CodeDom;
+using System.Reflection;
 
 namespace ManagedDb.Core.Features.DataProxyCreators;
 

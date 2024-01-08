@@ -32,4 +32,7 @@ app.AddCommands<GitHubPrChangesV2Command>();
 // add create db command
 app.AddCommands<CreateDbCommand>();
 
+// add data proxy generate command
+app.AddCommands<DataProxyGenerateCommand>();
+
 app.Run();
