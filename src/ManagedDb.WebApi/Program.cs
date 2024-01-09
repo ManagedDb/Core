@@ -1,7 +1,4 @@
 using ManagedDb.WebApi.Models;
-using Microsoft.Extensions.Options;
-using System.Reflection;
-using System.Reflection.Emit;
 
 var builder = WebApplication.CreateBuilder(args);
 

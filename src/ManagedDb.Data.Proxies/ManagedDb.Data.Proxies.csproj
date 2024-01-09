@@ -9,4 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.14" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ManagedDb.Core\ManagedDb.Core.csproj" />
+  </ItemGroup>
 </Project>
