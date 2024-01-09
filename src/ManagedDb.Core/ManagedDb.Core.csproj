@@ -16,7 +16,6 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />
     <PackageReference Include="System.CodeDom" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.14" />
   </ItemGroup>
 </Project>
