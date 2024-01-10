@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ManagedDb.Core.Features.DataProxyCreators
 {
-    public class DataProxyCreator
+    public class DataProxyClassesCreator
     {
         private const string Namespace = "ManagedDb.Core.Features.DataProxyCreators";
 

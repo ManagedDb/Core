@@ -6,7 +6,7 @@ namespace ManagedDb.ConsoleClient.Commands;
 
 public class DataProxyGenerateCommand
 {
-    private readonly DataProxyCreator dataProxyCreator;
+    private readonly DataProxyClassesCreator dataProxyCreator;
 
     private const string PathToSave = $@"D:\Repositories\ManagedDb\Core\src\ManagedDb.Data.Proxies";
     private List<string> EntitySchemas = new List<string>() 
@@ -16,7 +16,7 @@ public class DataProxyGenerateCommand
         @"D:\Repositories\ManagedDb\Core\data\users\mdb.entity.schema.json"
     };
 
-    public DataProxyGenerateCommand(DataProxyCreator dataProxyCreator)
+    public DataProxyGenerateCommand(DataProxyClassesCreator dataProxyCreator)
     {
         this.dataProxyCreator = dataProxyCreator;
     }
