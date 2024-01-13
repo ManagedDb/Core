@@ -478,4 +478,4 @@ $RECYCLE.BIN/
 
 # mdb specific
 src/**/launchSettings.json
-*g.cs
+*.g.cs
