@@ -21,6 +21,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManagedDb.Core\ManagedDb.Core.csproj" />
+    <ProjectReference Include="..\ManagedDb.Dtos\ManagedDb.Dtos.csproj" />
+    <ProjectReference Include="..\ManagedDb.Proxies\ManagedDb.Proxies.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Data\mdb.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

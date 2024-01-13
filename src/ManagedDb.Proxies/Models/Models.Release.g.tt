@@ -1,0 +1,51 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ output extension=".cs" #>
+
+using ManagedDb.Dtos.Models;
+
+namespace ManagedDb.Proxies.Models
+{
+#if !DEBUG
+<#
+    string[] jsonFiles = System.IO.Directory.GetFiles(Host.ResolvePath("..\\App_Data"), "*.json");
+    foreach (string jsonFile in jsonFiles)
+    {
+        string json = System.IO.File.ReadAllText(jsonFile);
+        JObject jObject = JObject.Parse(json);
+        string className = (string)jObject["entityName"];
+        JObject fields = (JObject)jObject["fields"];
+#>
+
+    public class <#= className #> : MdbBaseEntity
+    {
+    <#
+            foreach (KeyValuePair<string, JToken> field in fields)
+            {
+                string fieldName = field.Key;
+
+                if(fieldName == "id")
+				{
+					continue;
+				}
+
+                string fieldType = (string)field.Value["fieldType"];
+                bool isRequired = (bool)field.Value["isRequired"];
+                if (fieldType == "string" && !isRequired)
+                {
+                    fieldType += "?";
+                }
+    #>
+    public <#= fieldType #> <#= fieldName #> { get; set; }
+    <# } #>
+}
+    <# } #>
+
+#endif
+}

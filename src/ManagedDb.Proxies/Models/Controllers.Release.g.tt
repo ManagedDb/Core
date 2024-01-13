@@ -1,0 +1,36 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ output extension=".cs" #>
+
+using ManagedDb.Dtos.Models;
+
+namespace ManagedDb.Proxies.Models
+{
+#if !DEBUG
+<#
+    string[] jsonFiles = System.IO.Directory.GetFiles(Host.ResolvePath("..\\App_Data"), "*.json");
+    foreach (string jsonFile in jsonFiles)
+    {
+        string json = System.IO.File.ReadAllText(jsonFile);
+        JObject jObject = JObject.Parse(json);
+        string className = (string)jObject["entityName"];
+        string controllerName = $"{className}Controller";
+#>
+
+    public class <#= controllerName #> : MdbOdataControllerBase<<#= className #>>
+    {
+        public <#= controllerName #>(BaseMdbDbContext dbContext)
+            : base(dbContext)
+        {
+        }
+}
+    <# } #>
+
+#endif
+}

@@ -1,3 +1,5 @@
+using ManagedDb.Core.Features.DataProxyCreators;
+using ManagedDb.Core.Helpers;
 using ManagedDb.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -9,37 +11,26 @@ namespace ManagedDb.WebApi.Controllers;
 [Route("[controller]")]
 public class DataTypesController : ControllerBase
 {
+    private readonly MdbDbContext dbContext;
     private readonly ILogger<DataTypesController> logger;
-    private readonly IOptions<ManagedDbApiOptions> options;
 
     public DataTypesController(
-        ILogger<DataTypesController> logger,
-        IOptions<ManagedDbApiOptions> options)
+        MdbDbContext dbContext,
+        ILogger<DataTypesController> logger)
     {
+        this.dbContext = dbContext;
         this.logger = logger;
-        this.options = options;
     }
-
-    //[HttpPost("register-types")]
-    //public IActionResult Post()
-    //{
-    //    var pathes = this.options.Value.EntityListPath
-    //        .Split(",")
-    //        .ToArray();
-
-    //    DataTypeCreator.RegisterDataTypes(pathes);
-
-    //    return Ok();
-    //}
 
     [HttpGet("types")]
     public IActionResult Get() 
     {
-        var assembly = Assembly.GetExecutingAssembly();
-        var assemblyName = assembly.GetName();
+        var assembly = AppDomain.CurrentDomain.GetAssemblies()
+            .Where(x => x.FullName == MdbHelper.ManagedDbAssemblyName)
+            .FirstOrDefault();
 
-        Console.WriteLine(assemblyName.FullName);
-        Console.WriteLine(assemblyName.Name);
+        if(assembly == null)
+            return NotFound();
 
         var types = assembly.GetTypes()
             .Where(t => t.Namespace == "ManagedDb.EntityDataTypes.Proxies.Models")

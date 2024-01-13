@@ -1,4 +1,5 @@
-﻿using ManagedDb.Core.Features.GenerateDbs;
+﻿using ManagedDb.Core.Features.DataProxyCreators;
+using ManagedDb.Core.Features.GenerateDbs;
 using ManagedDb.Core.Features.GetLatestChanges;
 using ManagedDb.Core.Features.PullRequests;
 using ManagedDb.Core.Features.SchemaConvertors;
