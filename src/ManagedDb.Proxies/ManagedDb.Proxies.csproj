@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <Compile Update="Models\Controllers.Release.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
+      <DesignTime>False</DesignTime>
+      <AutoGen>False</AutoGen>
       <DependentUpon>Controllers.Release.g.tt</DependentUpon>
     </Compile>
     <Compile Update="Models\Models.Release.g.cs">
