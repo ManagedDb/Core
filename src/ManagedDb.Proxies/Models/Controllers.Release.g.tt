@@ -1,11 +1,10 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
-<#@ assembly name="Newtonsoft.Json.dll" #>
+<#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="Newtonsoft.Json" #>
-<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.Text.Json" #>
 <#@ output extension=".cs" #>
 
 using ManagedDb.Dtos.Models;
@@ -14,12 +13,12 @@ namespace ManagedDb.Proxies.Models
 {
 #if !DEBUG
 <#
-    string[] jsonFiles = System.IO.Directory.GetFiles(Host.ResolvePath("..\\App_Data"), "*.json");
+    string[] jsonFiles = Directory.GetFiles(Host.ResolvePath("..\\App_Data"), "*.mdb.entity.schema.json");
     foreach (string jsonFile in jsonFiles)
     {
-        string json = System.IO.File.ReadAllText(jsonFile);
-        JObject jObject = JObject.Parse(json);
-        string className = (string)jObject["entityName"];
+        string json = File.ReadAllText(jsonFile);
+        JsonDocument jDoc = JsonDocument.Parse(json);
+        string className = jDoc.RootElement.GetProperty("entityName").GetString();
         string controllerName = $"{className}Controller";
 #>
 

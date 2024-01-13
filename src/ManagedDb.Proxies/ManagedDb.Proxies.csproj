@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="T4ProxyGeneratingTarget">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
@@ -30,8 +26,8 @@
       <DependentUpon>Controllers.Release.g.tt</DependentUpon>
     </Compile>
     <Compile Update="Models\Models.Release.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
+      <DesignTime>False</DesignTime>
+      <AutoGen>False</AutoGen>
       <DependentUpon>Models.Release.g.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -46,5 +42,13 @@
       <LastGenOutput>Models.Release.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
+
+  <Target Name="T4ProxyGeneratingTarget" Condition=" '$(Configuration)' != 'Debug' ">
+    <Message Text="Running T4 templates for Models" Importance="high" />
+    <Exec Command="t4 Models\Models.Release.g.tt" />
+    <Message Text="Running T4 templates for Controllers" Importance="high" />
+    <Exec Command="t4 Models\Controllers.Release.g.tt" />
+  </Target>
+
 
 </Project>

@@ -475,4 +475,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-/src/ManagedDb.ConsoleClient/Properties/launchSettings.json
+
+# mdb specific
+src/**/launchSettings.json
+*g.cs

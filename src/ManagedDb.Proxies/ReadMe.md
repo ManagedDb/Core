@@ -21,13 +21,27 @@ The controllers support OData protocol.
 
 ## How to use
 
+### Requirements
+
+* [dotnet-t4](https://github.com/mono/t4). Install tool globally
+
+We use `t4` for creating proxy classes in Release mode. 
+
+In `csproj` file you can find a target which will execute t4 util. 
+
+### Instraction
+
+#### Debug mode
+
 There are no any special requirements for using this library. Just add it to your project and use it.
 
-For release mode, you should add json files to "App_Data" folder.
+#### Release mode
 
-then build the project.
-
-Extract the "ManagedDb.Proxies.dll" from "bin" folder and add it to your project (in real scenaio it will be webapp).
+1. Get mdb schema json files
+2. Add them to "App_Data" folder. Remember the extension of files should be `*.mdb.entity.schema.json`
+3. Run `dotnet run -c Release`
+4. Copy `ManagedDb.Proxies.dll` and `ManagedDb.Proxies.pdb` files
+5. Past to `ManagedDb.WebApi` publish project folder
 
 ## How to test
 
