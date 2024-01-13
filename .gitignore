@@ -478,5 +478,5 @@ $RECYCLE.BIN/
 
 # mdb specific
 src/**/launchSettings.json
-*.g.cs
-src/**/*.g.cs
+/src/ManagedDb.Proxies/Models/Models.Release.g.cs
+/src/ManagedDb.Proxies/Models/Controllers.Release.g.cs
