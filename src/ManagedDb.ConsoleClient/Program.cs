@@ -32,4 +32,5 @@ app.AddCommands<GitHubPrChangesV2Command>();
 // add create db command
 app.AddCommands<CreateDbCommand>();
 
+// run app.
 app.Run();

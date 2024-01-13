@@ -1,0 +1,26 @@
+{
+    "entityName": "user",
+    "fields": {
+        "id": {
+            "fieldType": "int",
+            "isRequired": true,
+            "order": 0,
+            "isPk": true
+        },
+        "firstName": {
+            "fieldType": "string",
+            "isRequired": true,
+            "order": 1
+        },
+        "lastName": {
+            "fieldType": "string",
+            "isRequired": true,
+            "order": 2
+        },
+        "dateBirth": {
+            "fieldType": "string",
+            "isRequired": true,
+            "order": 3
+        }
+    }
+}

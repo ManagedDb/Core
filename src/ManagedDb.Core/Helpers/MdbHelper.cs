@@ -13,5 +13,9 @@ namespace ManagedDb.Core.Helpers
         {
             PropertyNameCaseInsensitive = true
         };
+
+        public static string ManagedDbAppDomainName => "ManagedDb.Data.Proxies";
+        public static string ManagedDbAssemblyName => "ManagedDb.Data.Proxies";
+        public static string ManagedDModuleName => "ManagedDb.Data.Proxies";
     }
 }
